@@ -7,7 +7,7 @@ import './interfaces/IBEP20.sol';
 import './token/SafeBEP20.sol';
 import '@openzeppelin/contracts/access/Ownable.sol';
 
-import "./token/FishToken.sol";
+import "./token/FrostToken.sol";
 
 // import "@nomiclabs/buidler/console.sol";
 
@@ -47,8 +47,8 @@ contract MasterChef is Ownable {
         uint256 accCakePerShare; // Accumulated CAKEs per share, times 1e12. See below.
     }
 
-    // The FISH TOKEN!
-    FishToken public cake;
+    // The FROST TOKEN!
+    FrostToken public cake;
     // CAKE tokens created per block - ownerFee.
     uint256 public cakePerSecond;
     // Bonus muliplier for early cake makers.
@@ -74,7 +74,7 @@ contract MasterChef is Ownable {
     event EmergencyWithdraw(address indexed user, uint256 indexed pid, uint256 amount);
 
     constructor(
-        FishToken _cake,
+        FrostToken _cake,
         uint256 _cakePerSecond
     ) {
         cake = _cake;
@@ -262,7 +262,7 @@ contract MasterChef is Ownable {
         emit EmergencyWithdraw(msg.sender, _pid, amount);
     }
 
-    // Safe FISH transfer function, just in case if rounding error causes pool to not have enough FISH.
+    // Safe FROST transfer function, just in case if rounding error causes pool to not have enough FROST.
     function safeCakeTransfer(address _to, uint256 _amount) internal {
         cake.safeCakeTransfer(_to, _amount);
     }
@@ -277,7 +277,7 @@ contract MasterChef is Ownable {
         allocRatio = _allocRatio;
     }
 
-    // reduce FISH emissions
+    // reduce FROST emissions
     function reduceEmissions(uint256 _mintAmt) external onlyOwner {
         require(_mintAmt < cakePerSecond, "Only lower amount allowed.");
         require(_mintAmt.mul(100).div(cakePerSecond) >= 95, "Max 5% decrease per transaction.");

@@ -4,11 +4,11 @@ pragma solidity >0.6.6;
 
 import "./BEP20.sol";
 
-contract FishToken is BEP20 {
+contract FrostToken is BEP20 {
     using SafeMath for uint256;
     uint256 public constant maxSupply = 99_999_999e18;
 
-    constructor() BEP20('SwapFish', 'FISH') {
+    constructor() BEP20('FrostSwap', 'FROST') {
         _mint(msg.sender, 100_000e18);
     }
 
@@ -23,11 +23,11 @@ contract FishToken is BEP20 {
         return true;
     }
 
-    // Safe fish transfer function, just in case if rounding error causes pool to not have enough FISH.
+    // Safe frost transfer function, just in case if rounding error causes pool to not have enough FROST.
     function safeCakeTransfer(address _to, uint256 _amount) public onlyOwner {
-        uint256 fishBal = balanceOf(address(this));
-        if (_amount > fishBal) {
-            _transfer(address(this), _to, fishBal);
+        uint256 frostBal = balanceOf(address(this));
+        if (_amount > frostBal) {
+            _transfer(address(this), _to, frostBal);
         } else {
             _transfer(address(this), _to, _amount);
         }
